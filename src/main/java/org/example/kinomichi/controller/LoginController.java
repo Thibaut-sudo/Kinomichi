@@ -17,9 +17,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Slf4j
 public class LoginController {
 
-    @RequestMapping(path = "/index", method = RequestMethod.POST)
-    public String indexFormSub(@Valid @ModelAttribute  _User user) {
-        log.info("Received values: {}", user);
-        return "redirect:succes.html";
-    }
+
 }
