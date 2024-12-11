@@ -20,6 +20,9 @@ public class SignUpController {
     @RequestMapping(path = "/inscription", method = RequestMethod.POST)
     public String SigneUpFormSub(@Valid @ModelAttribute  _User user) {
         log.info("Received values: {}", user);
+        user.setId();
+        user.setPassword(user.getPassword());
+
         saveUser(user);
         return "redirect:succes.html";
     }
@@ -30,4 +33,5 @@ public class SignUpController {
             log.error("Error while saving user: {}", e.getMessage());
         }
     }
+
 }
