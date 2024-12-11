@@ -1,14 +1,17 @@
 package org.example.kinomichi.model;
 
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.util.UUID;
 
 
+
+
+@Getter
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +22,7 @@ public class _User {
 
     @Id
     private Integer id;
+    // Getters
     private String firstName;
     private String lastName;
 
@@ -29,50 +33,23 @@ public class _User {
 
 
     public _User( String firstName, String lastName, String email, String password) {
-        this.id = UUID.randomUUID().hashCode();
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
-    // Getters
-    public String getFirstName() {
-        return firstName;
+
+
+    public void setId() {
+        this.id = UUID.randomUUID().hashCode();;
     }
-    public String getLastName() {
-        return lastName;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public int getStatut() {
-        return statut;
-    }
-    // Setters
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
+    //cree une methode de pour cripter le mot de passe
     public void setPassword(String password) {
-        this.password = password;
-    }
-    public void setStatut(int statut) {
-        this.statut = statut;
+        this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    public Integer getId() {
-        return id;
-    }
+
 }
