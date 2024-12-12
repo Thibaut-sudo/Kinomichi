@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>Dashboard</h3>
+    <ul>
+        <li class="nav-item "><a class="nav-link" href="#">Tableau de bord</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Statistiques</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Utilisateurs</a></li>
+    </ul>
+    <hr>
+    <h5>Administration</h5>
+    <ul>
+        <li class="nav-item"><a class="nav-link" href="#">Hobby 2000</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Logs</a></li>
+    </ul>
+</div>
+
+<div class="content">
+    <div class="row">
+        <!-- Stat Cards -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Utilisateurs</h5>
+                <h5><span class="blue-square"></span></h5>
+            </div>
+            <!-- Affichage du nombre total d'utilisateurs -->
+            <h2 th:text="${nbUser}">150</h2>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5>Revenus</h5>
+                <h5><span class="blue-square"></span></h5>
+            </div>
+            <h2>8,457€</h2>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5>Commandes</h5>
+                <h5><span class="blue-square"></span></h5>
+            </div>
+            <h2>14.2%</h2>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
+        <!-- Latest Transactions -->
+        <div class="card" style="flex:2;">
+            <div class="card-header">
+                <h5>Users</h5>
+                <h5><span class="blue-square"></span></h5>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th>to pay</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="person : ${accueil}">
+                    <td th:text="${person.id}"></td>
+                    <td th:text="${person.firstName}"></td>
+                    <td th:text="${person.lastName}"></td>
+                    <td th:text="${person.email}"></td>
+                    <td>0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card" style="flex: 1;">
+            <div class="card-header">
+                <h5>Activité récente</h5>
+                <h5><span class="blue-square"></span></h5>
+            </div>
+            <ul class="activity-list">
+                <li>Nouvel utilisateur inscrit <small>(il y a 5 minutes)</small></li>
+                <li>Nouvelle commande #1234 <small>(il y a 12 minutes)</small></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

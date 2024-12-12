@@ -1,43 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="css/Style.css">
 <head>
-  <meta charset="UTF-8">
-  <title>Kinomichi</title>
-  <script type="module" src="controler/index.js"></script>
+    <meta charset="UTF-8">
+    <title>Kinomichi</title>
+    <link rel="stylesheet" href="css/styleFormulaire.css">
 </head>
 <body>
 
-
 <form action="/inscription" method="post">
-  <div class="form">
-    <div class="title">Welcome to</div>
-    <div class="subtitle"> Kinomichi</div>
-    <div class="input-container ic1">
+    <div class="form">
+        <div class="title">Welcome to</div>
+        <div class="subtitle"> Kinomichi</div>
 
-      <input id="prenom" class="input" name="firstName" type="text" placeholder=" " required/>
-      <div class="cut"></div>
-      <label for="prenom" class="placeholder">First name</label>
-    </div>
-    <div class="input-container ic2">
-      <input id="nom" class="input" name="lastName" type="text" placeholder=" " required/>
-      <div class="cut"></div>
-      <label for="nom" class="placeholder">Last name</label>
-    </div>
-    <div class="input-container ic2">
-      <input id="email" class="input" name="email" type="text" placeholder=" " required/>
-      <div class="cut cut-short"></div>
-      <label for="email" class="placeholder">Email</label>
-    </div>
-    <div class="input-container ic2">
-      <input id="password" class="input" name="password" type="password" placeholder=" " required/>
-      <div class="cut cut-short"></div>
-      <label for="password" class="placeholder">Password</label>
-    </div>
+      <div class="subtitle">
+        <div id="error-message"></div>
 
-    <input type="submit" class="submit" value="Submit">
-  </div>
+      </div>
+
+        <div class="input-container ic1">
+            <input id="prenom" class="input" name="firstName" type="text" placeholder=" " required/>
+            <div class="cut"></div>
+            <label for="prenom" class="placeholder">First name</label>
+        </div>
+
+        <div class="input-container ic2">
+            <input id="nom" class="input" name="lastName" type="text" placeholder=" " required/>
+            <div class="cut"></div>
+            <label for="nom" class="placeholder">Last name</label>
+        </div>
+
+        <div class="input-container ic2">
+            <input id="email" class="input" name="email" type="text" placeholder=" " required/>
+            <div class="cut cut-short"></div>
+            <label for="email" class="placeholder">Email</label>
+        </div>
+
+        <div class="input-container ic2">
+            <input id="password" class="input" name="password" type="password" placeholder=" " required/>
+            <div class="cut"></div>
+            <label for="password" class="placeholder">Password</label>
+        </div>
+
+        <input type="submit" class="submit" value="Submit">
+    </div>
 </form>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('error')) {
+        const errorDiv = document.getElementById('error-message');
+        errorDiv.style.color = 'red';
+        errorDiv.style.marginBottom = '40px';
+        errorDiv.textContent = params.get('error');
+    }
+</script>
 
 </body>
 </html>

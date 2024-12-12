@@ -8,6 +8,11 @@ public class KinomichiApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(KinomichiApplication.class, args);
+
+
+
     }
+
+
 
 }
