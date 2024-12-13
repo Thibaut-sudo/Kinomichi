@@ -75,6 +75,13 @@ body {
 .cut-short {
     width: 50px;
 }
+.cut-long {
+    width: 100px;
+}
+
+.cut-extra {
+    width: 800px;
+}
 
 .input:focus ~ .cut,
 .input:not(:placeholder-shown) ~ .cut {

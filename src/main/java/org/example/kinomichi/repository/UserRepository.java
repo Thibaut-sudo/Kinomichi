@@ -37,4 +37,7 @@ public interface UserRepository extends JpaRepository<_User, Long> {
     //verifie le statut de l'utilisateur pour savoir s'il est admin
     @Query("SELECT CASE WHEN u.statut = 'admin' THEN true ELSE false END FROM _User u WHERE u.email = :email")
     boolean isAdmin(String email);
+
+
+
 }

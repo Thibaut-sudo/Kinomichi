@@ -2,7 +2,12 @@ package org.example.kinomichi.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -14,18 +19,16 @@ public class _Event {
 
     private Long id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 
-    private String title;
+    @Getter
+    private String name;
     private String description;
+    // Getters et setters
+    @Getter
+    @Setter
+    @DateTimeFormat(pattern = "yyyy-MM-dd")  // Assurez-vous que le format est bien spécifié
+    private LocalDate date;
+    private int club_id;
 
-    @ManyToOne
-    @JoinColumn(name = "club_id", nullable = false)
-    private _Club club;
 
-    @ManyToMany
-    @JoinTable(
-            name = "event_user",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<_User> participants = new HashSet<>();
 }
+

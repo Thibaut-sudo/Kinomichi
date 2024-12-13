@@ -30,7 +30,7 @@ public class SignUpController {
             user.setId(generateUUID());
 
 
-            log.error("Un utilisateur avec cet email existe déjà");
+
 
             // Enregistrer l'utilisateur via le service
             userService.saveUser(user);

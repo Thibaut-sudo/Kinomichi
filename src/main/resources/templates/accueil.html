@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +18,8 @@
     <hr>
     <h5>Administration</h5>
     <ul>
-        <li class="nav-item"><a class="nav-link" href="#">Hobby 2000</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Logs</a></li>
+        <li class="nav-item"><a class="nav-link" href="addClub">Create club</a></li>
+        <li class="nav-item"><a class="nav-link" href="addEvent">Create a event</a></li>
     </ul>
 </div>
 
@@ -31,7 +31,8 @@
                 <h5>Utilisateurs</h5>
                 <h5><span class="blue-square"></span></h5>
             </div>
-
+            <!-- Affichage du nombre total d'utilisateurs -->
+            <h2 th:text="${nbClub}">150</h2>
         </div>
         <div class="card">
             <div class="card-header">
@@ -65,8 +66,14 @@
                     <th>Date of the next event</th>
                     <th>Title of the event</th>
                 </tr>
+
                 </thead>
                 <tbody>
+                <tr th:each="club : ${accueil}">
+                    <td th:text="${club.name}"></td>
+
+                    <td>0</td>
+                </tr>
 
                 </tbody>
             </table>

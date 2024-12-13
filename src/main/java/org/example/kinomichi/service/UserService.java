@@ -1,6 +1,8 @@
 package org.example.kinomichi.service;
 
 import lombok.extern.slf4j.Slf4j;
+
+import org.example.kinomichi.model._Club;
 import org.example.kinomichi.model._User;
 import org.example.kinomichi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+
 
     public void saveUser(_User user) {
 
@@ -36,4 +40,6 @@ public class UserService {
     public boolean isAdmin(String email) {
         return userRepository.isAdmin(email);
     }
+
+
 }

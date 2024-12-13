@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kinomichi</title>
+    <link rel="stylesheet" href="css/styleFormulaire.css">
+</head>
+<body>
+
+
+<form action="/addClub" method="post">
+    <div class="form">
+        <div class="title">Create a club</div>
+
+        <div class="subtitle">
+            <div id="error-message"></div>
+
+            <div class="input-container ic1">
+                <input id="name" class="input" name="Name" type="text" placeholder=" " required/>
+                <div class="cut cut-long"></div>
+                <label for="name" class="placeholder">Club name</label>
+            </div>
+
+
+        <input type="submit" class="submit" value="Submit">
+
+    </div>
+    </div>
+</form>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('error')) {
+        const errorDiv = document.getElementById('error-message');
+        errorDiv.style.color = 'red';
+        errorDiv.style.marginBottom = '40px';
+        errorDiv.textContent = params.get('error');
+    }
+</script>
+
+</body>
+</html>

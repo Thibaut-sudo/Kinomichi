@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kinomichi</title>
+    <link rel="stylesheet" href="css/styleFormulaire.css">
+</head>
+<body>
+
+
+<form action="/addEvent" method="post">
+    <div class="form">
+        <div class="title">Create a event</div>
+
+        <div class="subtitle">
+            <div id="error-message"></div>
+
+            <div class="input-container ic1">
+                <input id="name" class="input" name="Name" type="text" placeholder=" " required/>
+                <div class="cut cut-long"></div>
+                <label for="name" class="placeholder">Event name</label>
+            </div>
+
+            <div class="input-container ic1">
+                <input id="date" class="input" name="Date" type="date" placeholder=" " required/>
+                <div class="cut cut-long"></div>
+                <label for="date" class="placeholder">Date</label>
+            </div>
+
+
+            <div class="input-container ic1">
+                <select id="club" class="input" name="Club" required>
+                    <option value="" disabled selected>Choose a club</option>
+                    <option th:each="club : ${clubs}" th:value="${club.id}" th:text="${club.name}"></option>
+                </select>
+                <div class="cut cut-extra"></div>
+                <label for="club" class="placeholder">Club</label>
+            </div>
+
+            <input type="submit" class="submit" value="Submit">
+
+
+        </div>
+    </div>
+</form>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('error')) {
+        const errorDiv = document.getElementById('error-message');
+        errorDiv.style.color = 'red';
+        errorDiv.style.marginBottom = '40px';
+        errorDiv.textContent = params.get('error');
+    }
+</script>
+
+</body>
+</html>

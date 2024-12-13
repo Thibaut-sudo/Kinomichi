@@ -17,7 +17,7 @@ import java.util.Set;
 public class _User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment behavior
+
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -31,18 +31,7 @@ public class _User {
 
     private String statut = "user";
 
-    // Relation Many-to-Many avec Club
-    @ManyToMany
-    @JoinTable(
-            name = "user_club",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "club_id")
-    )
-    private Set<_Club> clubs = new HashSet<>();
 
-    // Relation Many-to-Many avec Event
-    @ManyToMany(mappedBy = "participants")
-    private Set<_Event> events = new HashSet<>();
 
     // Constructeur avec hachage du mot de passe
     public _User(Long id, String firstName, String lastName, String email, String password) {

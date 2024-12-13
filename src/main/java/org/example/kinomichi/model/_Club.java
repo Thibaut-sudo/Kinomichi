@@ -16,9 +16,7 @@ public class _Club {
 
     private String name;
 
-    @ManyToMany(mappedBy = "clubs")
-    private Set<_User> members = new HashSet<>();
 
-    @OneToMany(mappedBy = "club", cascade = CascadeType.ALL)
-    private Set<_Event> events = new HashSet<>();
+
+
 }
