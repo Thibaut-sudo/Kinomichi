@@ -29,7 +29,7 @@
 
 
             <div class="input-container ic1">
-                <select id="club" class="input" name="Club" required>
+                <select id="club" class="input" name="id" required>
                     <option value="" disabled selected>Choose a club</option>
                     <option th:each="club : ${clubs}" th:value="${club.id}" th:text="${club.name}"></option>
                 </select>

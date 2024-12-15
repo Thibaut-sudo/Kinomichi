@@ -28,4 +28,16 @@ public class EventService {
     public List<_Event> getAllEvent() {
         return eventRepository.findAll();
     }
+
+    public List<_Event> getAllEvents() {
+        return eventRepository.findAll();
+    }
+
+    public _Event getNextEventByClub(Long id) {
+        return eventRepository.findNextEventByClub(id);
+    }
+
+    public List<_Event> getUpcomingEventsForUser() {
+        return eventRepository.findUpcomingEventsForUser();
+    }
 }

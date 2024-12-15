@@ -16,7 +16,6 @@ import java.util.UUID;
 @Data
 public class _Event {
     @Id
-
     private Long id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 
     @Getter
@@ -27,8 +26,11 @@ public class _Event {
     @Setter
     @DateTimeFormat(pattern = "yyyy-MM-dd")  // Assurez-vous que le format est bien spécifié
     private LocalDate date;
-    private int club_id;
+    private long club_id;
 
 
+    public void setClub(_Club selectedClub) {
+        this.club_id = selectedClub.getId();
+    }
 }
 

@@ -26,4 +26,8 @@ public class ClubService {
     public List<_Club> getAllClub() {
         return clubRepository.findAll();
     }
+
+    public _Club getClubById(Long clubId) {
+        return clubRepository.findById(clubId).orElse(null);
+    }
 }

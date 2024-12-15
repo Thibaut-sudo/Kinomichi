@@ -34,8 +34,35 @@ public class DatabaseInitializer {
                 "club_id INTEGER, " +
                 "FOREIGN KEY (club_id) REFERENCES _club(id));";
 
-        jdbcTemplate.execute(createUserTable);
-        jdbcTemplate.execute(createClubTable);
-        jdbcTemplate.execute(createEventTable);
+        String insertAdmin = "INSERT INTO _user (id, email, first_name, last_name, password, statut) VALUES (1,'admin@admin.com', 'admin', 'admin', 'admin', 'admin');";
+
+
+        String checkAdmin = "SELECT * FROM _user WHERE id = 1;";
+        if (jdbcTemplate.queryForList(checkAdmin).isEmpty()) {
+            jdbcTemplate.execute(insertAdmin);
+        }
+
+        //create tables many to many
+        String createClubUserTable = "CREATE TABLE IF NOT EXISTS _club_user (" +
+                "club_id INTEGER, " +
+                "user_id INTEGER, " +
+                "FOREIGN KEY (club_id) REFERENCES _club(id), " +
+                "FOREIGN KEY (user_id) REFERENCES _user(id));";
+
+        //create tables many to many
+
+        String createEventUserTable = "CREATE TABLE IF NOT EXISTS _event_user (" +
+                "event_id INTEGER, " +
+                "user_id INTEGER, " +
+                "FOREIGN KEY (event_id) REFERENCES _event(id), " +
+                "FOREIGN KEY (user_id) REFERENCES _user(id));";
+
+
+       // jdbcTemplate.execute(createUserTable);
+      //  jdbcTemplate.execute(createClubTable);
+      //  jdbcTemplate.execute(createEventTable);
+        //jdbcTemplate.execute(createClubUserTable);
+        //jdbcTemplate.execute(createEventUserTable);
+        jdbcTemplate.execute(checkAdmin);
     }
 }

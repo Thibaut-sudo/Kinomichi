@@ -20,13 +20,15 @@ import java.util.List;
 @Slf4j
 public class addEvent {
 
+
+
+
     @Autowired
     private EventService eventService;
 
     @Autowired
     private ClubService clubService;
 
-    // Cette méthode gère le GET pour afficher le formulaire d'ajout d'événement
     @GetMapping("/addEvent")
     public String showAddEventForm(Model model) throws IOException {
 
@@ -42,7 +44,10 @@ public class addEvent {
     }
 
     @PostMapping("/addEvent")
-    public String addEvent(@ModelAttribute @Valid _Event event, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addEvent(@ModelAttribute @Valid _Event event,
+                           @RequestParam Long id,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             // Ajoutez un message d'erreur si la validation échoue
             redirectAttributes.addAttribute("error", "Please fill out all required fields.");
@@ -55,8 +60,24 @@ public class addEvent {
             return "redirect:/addEvent"; // Rediriger si l'événement existe déjà
         }
 
-        eventService.saveEvent(event);
-        return "redirect:/accueil"; // Si tout va bien, rediriger vers la page d'accueil
-    }
+        // Récupérer le club à partir de l'ID
+         _Club selectedClub = clubService.getClubById(id);
+        if (selectedClub == null) {
+            // Si le club n'existe pas, retourner une erreur
+            redirectAttributes.addAttribute("error", "Selected club not found.");
+            return "redirect:/addEvent";
+        }
 
-}
+        // Associer le club à l'événement
+        event.setClub(selectedClub);
+
+        // Sauvegarder l'événement
+        event.setId(generateUUID());
+        eventService.saveEvent(event);
+
+        return "redirect:/accueil"; // Rediriger vers la page d'accueil après la création
+    }
+    public Long generateUUID() {
+        return java.util.UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+    }
+    }

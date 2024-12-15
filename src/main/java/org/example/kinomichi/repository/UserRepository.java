@@ -38,6 +38,6 @@ public interface UserRepository extends JpaRepository<_User, Long> {
     @Query("SELECT CASE WHEN u.statut = 'admin' THEN true ELSE false END FROM _User u WHERE u.email = :email")
     boolean isAdmin(String email);
 
-
-
+    @Query("SELECT u FROM _User u WHERE u.email = :email")
+    _User findByEmail(String email);
 }
