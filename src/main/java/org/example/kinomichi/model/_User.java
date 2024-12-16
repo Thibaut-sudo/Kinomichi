@@ -39,7 +39,7 @@ public class _User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        setHashedPassword(password); // Hash the password when creating the user
+         // Hash the password when creating the user
     }
 
     // Méthode pour hacher le mot de passe

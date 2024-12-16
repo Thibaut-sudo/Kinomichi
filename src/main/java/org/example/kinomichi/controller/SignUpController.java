@@ -28,7 +28,7 @@ public class SignUpController {
 
         }else {
             user.setId(generateUUID());
-
+            user.setHashedPassword(user.getPassword());
 
 
 
