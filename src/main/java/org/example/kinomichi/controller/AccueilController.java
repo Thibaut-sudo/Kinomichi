@@ -8,6 +8,7 @@ import org.example.kinomichi.model._User;
 import org.example.kinomichi.service.ClubService;
 import org.example.kinomichi.service.ClubToUserService;
 import org.example.kinomichi.service.EventService;
+import org.example.kinomichi.service.UserToEventService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +22,13 @@ public class AccueilController {
     private final ClubService clubService;
     private final EventService eventService;
     private final ClubToUserService clubToUserService;
+    private final UserToEventService userToEventService;
 
-    public AccueilController(ClubService clubService, EventService eventService, ClubToUserService clubToUserService) {
+    public AccueilController(ClubService clubService, EventService eventService, ClubToUserService clubToUserService, UserToEventService userToEventService) {
         this.clubService = clubService;
         this.eventService = eventService;
         this.clubToUserService = clubToUserService;
+        this.userToEventService = userToEventService;
     }
 
     @GetMapping("/accueil")
@@ -59,8 +62,11 @@ public class AccueilController {
         model.addAttribute("nbClub", userClubs.size());
 
         // Récupérer les événements pour la section "Your next Events"
-        List<_Event> upcomingEvents = eventService.getUpcomingEventsForUser();
-        model.addAttribute("events", upcomingEvents);
+        //todo
+        List<Long> upcomingEventsForUser = userToEventService.getEventsByUserId (currentUser.getId());
+
+        List<_Event> eventsForUser = eventService.getEventsById(upcomingEventsForUser);
+        model.addAttribute("events", eventsForUser);
 
 
         return "accueil"; // Affiche la vue accueil.html

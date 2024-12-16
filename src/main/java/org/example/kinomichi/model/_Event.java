@@ -16,7 +16,7 @@ import java.util.UUID;
 @Data
 public class _Event {
     @Id
-    private Long id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+    private Long id ;
 
     @Getter
     private String name;

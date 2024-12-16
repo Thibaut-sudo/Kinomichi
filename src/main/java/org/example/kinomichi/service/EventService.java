@@ -17,6 +17,10 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
+    public  List<_Event> getEventsById(List<Long> upcomingEventsForUser) {
+        return eventRepository.getEventsById(upcomingEventsForUser);
+    }
+
     public void saveEvent(_Event event) {
         eventRepository.save(event);
     }
@@ -37,7 +41,5 @@ public class EventService {
         return eventRepository.findNextEventByClub(id);
     }
 
-    public List<_Event> getUpcomingEventsForUser() {
-        return eventRepository.findUpcomingEventsForUser();
-    }
+
 }

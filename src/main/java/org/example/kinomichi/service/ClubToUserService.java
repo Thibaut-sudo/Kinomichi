@@ -1,6 +1,7 @@
 package org.example.kinomichi.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.kinomichi.model.MTMClubToUser;
 import org.example.kinomichi.model._Club;
 import org.example.kinomichi.model._User;
 import org.example.kinomichi.repository.ClubToUserRepository;
@@ -15,10 +16,16 @@ import java.util.List;
 public class ClubToUserService {
     @Autowired
     private ClubToUserRepository clubToUserRepository;
+    public void saveClubToUser(MTMClubToUser mtmClubToUser) {
+        clubToUserRepository.save(mtmClubToUser);
 
+    }
     public List<_Club> getClubsByUser(Long user_id) {
         return clubToUserRepository.getClubsByUser(user_id);
 
 
     }
+
+
+
 }

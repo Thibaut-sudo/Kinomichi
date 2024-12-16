@@ -1,11 +1,15 @@
 package org.example.kinomichi.controller;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.example.kinomichi.model.MTMEventToUser;
 import org.example.kinomichi.model._Club;
 import org.example.kinomichi.model._Event;
+import org.example.kinomichi.model._User;
 import org.example.kinomichi.service.ClubService;
 import org.example.kinomichi.service.EventService;
+import org.example.kinomichi.service.UserToEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +32,8 @@ public class addEvent {
 
     @Autowired
     private ClubService clubService;
+    @Autowired
+    private UserToEventService userToEventService;
 
     @GetMapping("/addEvent")
     public String showAddEventForm(Model model) throws IOException {
@@ -47,7 +53,9 @@ public class addEvent {
     public String addEvent(@ModelAttribute @Valid _Event event,
                            @RequestParam Long id,
                            BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes) {
+                           RedirectAttributes redirectAttributes,
+                           HttpSession session) {
+        _User currentUser = (_User) session.getAttribute("currentUser");
         if (bindingResult.hasErrors()) {
             // Ajoutez un message d'erreur si la validation échoue
             redirectAttributes.addAttribute("error", "Please fill out all required fields.");
@@ -74,6 +82,9 @@ public class addEvent {
         // Sauvegarder l'événement
         event.setId(generateUUID());
         eventService.saveEvent(event);
+        MTMEventToUser mtmEventToTUser = new MTMEventToUser(generateUUID(),event.getId(), currentUser.getId());
+        userToEventService.saveUserToEvent(mtmEventToTUser);
+
 
         return "redirect:/accueil"; // Rediriger vers la page d'accueil après la création
     }
