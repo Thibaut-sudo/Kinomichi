@@ -72,6 +72,7 @@ public class AccueilController {
         return "accueil"; // Affiche la vue accueil.html
     }
 
+
     public static class CLubEvent {
         @Setter
         private _Club club;

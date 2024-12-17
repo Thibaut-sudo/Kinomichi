@@ -14,7 +14,13 @@ public interface EventRepository extends JpaRepository<_Event, Long> {
     @Query(value = "SELECT * FROM _Event e WHERE e.club_id = :id AND datetime(e.date / 1000, 'unixepoch') > CURRENT_DATE ORDER BY e.date LIMIT 1", nativeQuery = true)
     _Event findNextEventByClub(@Param("id") Long clubId);
 
-    @Query(value = "SELECT * FROM _Event e WHERE e.id IN :upcomingEventsForUser AND datetime(e.date / 1000, 'unixepoch') > CURRENT_DATE ORDER BY e.date LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM _Event e WHERE e.id IN :upcomingEventsForUser AND datetime(e.date / 1000, 'unixepoch') > CURRENT_DATE ORDER BY e.date ", nativeQuery = true)
     List<_Event> getEventsById(List<Long> upcomingEventsForUser);
+
+    @Query(value = "SELECT COUNT(e) FROM _Event e WHERE e.club_id = :id")
+    int getnbOfeventForAClub(Long id);
+
+    @Query(value = "SELECT * FROM _Event e WHERE e.club_id = :clubId", nativeQuery = true)
+    List<_Event> getListEventByIdClub(Long clubId);
 }
 

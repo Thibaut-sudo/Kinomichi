@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Événements</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="sidebar">
+    <h3>Dashboard</h3>
+    <header class="header">
+        <div class="user-info">
+            <span th:text="'Hello : ' + ${currentUser.firstName} + ' ' + ${currentUser.lastName}"></span>
+        </div>
+    </header>
+    <ul>
+        <li class="nav-item"><a class="nav-link" href="/accueil">Tableau de bord</a></li>
+        <li class="nav-item"><a class="nav-link" href="/rejointClub">Rejoindre un club</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Statistiques</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Utilisateurs</a></li>
+    </ul>
+    <hr>
+    <h5>Administration</h5>
+    <ul>
+        <li class="nav-item"><a class="nav-link" href="addClub">Create a club</a></li>
+        <li class="nav-item"><a class="nav-link" href="addEvent">Create an Event</a></li>
+    </ul>
+</div>
+
+<div class="row" style="margin-top: 20px; margin-left: 30px; width: 80%;">
+    <!-- Liste des événements du club -->
+    <div class="card" style="flex: 2; width: 100%;">
+        <div class="card-header">
+            <h5>Liste des Événements pour le Club: <span th:text="${club.name}"></span></h5>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom de l'Événement</th>
+                <th>Date de l'Événement</th>
+                <th>Description</th>
+                <th>Participer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="event : ${events}">
+                <td th:text="${event != null ? event.name : 'No event'}"></td>
+                <td th:text="${event != null ? event.date : 'No event'}"></td>
+
+
+                <td>
+                    <a th:href="@{'/joinEvent/' + ${event.id}}" th:text="'Rejoindre'"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -42,4 +42,13 @@ public class EventService {
     }
 
 
+
+
+    public int getnbOfeventForAClub(Long id) {
+        return eventRepository.getnbOfeventForAClub(id);
+    }
+
+    public List<_Event> getListEventByIdClub(Long clubId) {
+        return eventRepository.getListEventByIdClub(clubId);
+    }
 }

@@ -27,6 +27,7 @@ public class _Event {
     @DateTimeFormat(pattern = "yyyy-MM-dd")  // Assurez-vous que le format est bien spécifié
     private LocalDate date;
     private long club_id;
+    private int Price;
 
 
     public void setClub(_Club selectedClub) {

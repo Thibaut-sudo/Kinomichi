@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Join a Club</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="sidebar">
+    <h3>Dashboard</h3>
+    <header class="header">
+        <div class="user-info">
+            <span th:text="${currentUser.firstName} + ' ' + ${currentUser.lastName}"></span>
+        </div>
+    </header>
+    <ul>
+        <li class="nav-item"><a class="nav-link" href="accueil">Tableau de bord</a></li>
+        <li class="nav-item"><a class="nav-link" href="rejointClub">Rejoindre un club</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Statistiques</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Utilisateurs</a></li>
+    </ul>
+    <hr>
+    <h5>Administration</h5>
+    <ul>
+        <li class="nav-item"><a class="nav-link" href="addClub">Create a club</a></li>
+        <li class="nav-item"><a class="nav-link" href="addEvent">Create a Event</a></li>
+    </ul>
+</div>
+
+<div class="row" style="margin-top: 20px; margin-left: 30px; width: 80%;">
+    <!-- Latest Transactions -->
+    <div class="card" style="flex: 2; width: 100%;">
+        <div class="card-header">
+            <h5>Clubs</h5>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Nombre of peoples</th>
+                <th>Number of events</th>
+                <th>Join the club</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="clubList : ${accueil}">
+                <td th:text="${clubList.club.name}"></td>
+                <td th:text="${clubList.user}"></td>
+                <td th:text="${clubList.event}"></td>
+                <td>
+                    <!-- Afficher le bouton uniquement si l'utilisateur n'est pas membre -->
+                    <a th:if="!${clubList.isMember}"
+                       th:href="@{'/joinClub/' + ${clubList.club.id}}">
+                        <img th:src="@{/images/Add-Button-PNG.png}" alt="Join Club" style="width: 5%;">
+                    </a>
+                    <!-- Message si l'utilisateur est déjà membre -->
+                    <span th:if="${clubList.isMember}">Déjà membre</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

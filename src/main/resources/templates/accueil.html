@@ -18,6 +18,7 @@
     </header>
     <ul>
         <li class="nav-item "><a class="nav-link" href="#">Tableau de bord</a></li>
+        <li class="nav-item"><a class="nav-link" href="joinClub">Rejoint a club </a></li>
         <li class="nav-item"><a class="nav-link" href="#">Statistiques</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Utilisateurs</a></li>
     </ul>
@@ -80,6 +81,14 @@
                     <!-- Protecting against null event object -->
                     <td th:text="${clubEvent.event != null ? clubEvent.event.date : 'No event'}"></td>
                     <td th:text="${clubEvent.event != null ? clubEvent.event.name : 'No event'}"></td>
+                    <td>
+                        <a th:if="${clubEvent.event != null}" th:href="@{'/eventList/' + ${clubEvent.club.id}}">Event list</a>
+                        <span th:if="${clubEvent.event == null}">No event available</span>
+                    </td>
+
+
+
+
                 </tr>
                 </tbody>
             </table>
@@ -104,6 +113,7 @@
                     <!-- Protecting against null event object -->
                     <td th:text="${event != null ? event.name : 'No event'}">Event Name</td>
                     <td th:text="${event != null ? event.date : 'No event'}">Date</td>
+                    <td th:text="${event != null ? event.price : 'No event'}">Price</td>
                 </tr>
                 </tbody>
             </table>

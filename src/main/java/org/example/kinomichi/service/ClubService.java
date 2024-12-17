@@ -2,6 +2,7 @@ package org.example.kinomichi.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.kinomichi.model._Club;
+import org.example.kinomichi.model._Event;
 import org.example.kinomichi.repository.ClubRepository;
 import org.example.kinomichi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,10 @@ public class ClubService {
 
     public _Club getClubById(Long clubId) {
         return clubRepository.findById(clubId).orElse(null);
+    }
+
+
+    public List<_Event> getEventsByClubId(Long clubId) {
+        return clubRepository.getEventsByClubId(clubId);
     }
 }

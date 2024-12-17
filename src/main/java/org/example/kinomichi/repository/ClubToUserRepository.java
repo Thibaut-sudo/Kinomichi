@@ -14,5 +14,9 @@ public interface ClubToUserRepository extends JpaRepository<MTMClubToUser , Long
     @Query("SELECT c FROM _Club c WHERE c.id IN (SELECT club_id FROM MTMClubToUser WHERE :Id = user_id)")
     public List<_Club> getClubsByUser(Long Id);
 
+    @Query("SELECT count(*) FROM MTMClubToUser WHERE club_id = :id")
+    int getnbOfUserForAClub(Long id);
 
+    @Query("SELECT club_id FROM MTMClubToUser WHERE user_id = :id")
+    List<Long> getUserClubIds(Long id);
 }

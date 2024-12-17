@@ -36,7 +36,7 @@ public class SignUpController {
             userService.saveUser(user);
 
             // Redirige vers la page d'accueil après inscription
-            return "redirect:/accueil";
+            return "redirect:/";
         }
 
 
