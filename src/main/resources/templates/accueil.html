@@ -17,10 +17,10 @@
         </div>
     </header>
     <ul>
-        <li class="nav-item "><a class="nav-link" href="#">Tableau de bord</a></li>
-        <li class="nav-item"><a class="nav-link" href="joinClub">Rejoint a club </a></li>
+        <li class="nav-item "><a class="nav-link" href="#">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="joinClub">Joint a club </a></li>
         <li class="nav-item"><a class="nav-link" href="#">Statistiques</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Utilisateurs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">User</a></li>
     </ul>
     <hr>
     <h5>Administration</h5>
@@ -35,7 +35,7 @@
         <!-- Stat Cards -->
         <div class="card">
             <div class="card-header">
-                <h5>Your Club</h5>
+                <h5>Number of Club</h5>
                 <h5><span class="blue-square"></span></h5>
             </div>
             <!-- Affichage du nombre total d'utilisateurs -->
@@ -43,17 +43,21 @@
         </div>
         <div class="card">
             <div class="card-header">
-                <h5>Revenus</h5>
+                <h5>Number of event</h5>
                 <h5><span class="blue-square"></span></h5>
             </div>
-            <h2>8,457€</h2>
+            <h2 th:text="${NbEvent}">150</h2>
         </div>
         <div class="card">
             <div class="card-header">
-                <h5>Commandes</h5>
+                <h5>Number of events not yet paid</h5>
                 <h5><span class="blue-square"></span></h5>
+
             </div>
-            <h2>14.2%</h2>
+
+            <h2 th:if="${nbEventToPay == 0}">No event needs to be paid for</h2>
+            <h2 th:if="${nbEventToPay != 0}" th:text="${nbEventToPay}">0</h2>
+
         </div>
     </div>
 
@@ -76,17 +80,16 @@
                 <tbody>
                 <tr th:each="clubEvent : ${accueil}">
                     <td th:text="${clubEvent.club.name}"></td>
-                    <td th:text="${clubEvent.club.id}"></td>
+                    <td th:text="${clubEvent.getNbUser()}"></td>
 
                     <!-- Protecting against null event object -->
                     <td th:text="${clubEvent.event != null ? clubEvent.event.date : 'No event'}"></td>
                     <td th:text="${clubEvent.event != null ? clubEvent.event.name : 'No event'}"></td>
                     <td>
-                        <a th:if="${clubEvent.event != null}" th:href="@{'/eventList/' + ${clubEvent.club.id}}">Event list</a>
+                        <a th:if="${clubEvent.event != null}" th:href="@{'/eventList/' + ${clubEvent.club.id}}">Event
+                            list</a>
                         <span th:if="${clubEvent.event == null}">No event available</span>
                     </td>
-
-
 
 
                 </tr>
@@ -105,15 +108,29 @@
                 <tr>
                     <th>Event Name</th>
                     <th>Date</th>
+                    <th>Price</th>
 
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="event : ${events}">
+                <tr th:each="eventList : ${events}">
                     <!-- Protecting against null event object -->
-                    <td th:text="${event != null ? event.name : 'No event'}">Event Name</td>
-                    <td th:text="${event != null ? event.date : 'No event'}">Date</td>
-                    <td th:text="${event != null ? event.price : 'No event'}">Price</td>
+                    <td th:text="${eventList != null ? eventList.event.getName() : 'No event'}">Event Name</td>
+                    <td th:text="${eventList != null ? eventList.event.getDate() : 'No event'}">Date</td>
+
+
+                    <td th:if="${eventList.isPayed}">
+                        <span style="color: green;" th:text="${eventList.event.price} + ' €'">Price</span>
+                    </td>
+                    <td th:if="${!eventList.isPayed}">
+                        <span style="color: red;"
+                              th:text="${eventList.event != null ? eventList.event.price +' €' : 'No events'}">Events</span>
+
+                        <a th:href="@{'/accueil/' + ${eventList.event.getId()}}" class="pay-button" style="color: blue;">Pay
+                            Now</a>
+                    </td>
+
+
                 </tr>
                 </tbody>
             </table>

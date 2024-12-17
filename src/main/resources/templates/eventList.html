@@ -10,12 +10,12 @@
     <h3>Dashboard</h3>
     <header class="header">
         <div class="user-info">
-            <span th:text="'Hello : ' + ${currentUser.firstName} + ' ' + ${currentUser.lastName}"></span>
+            <span th:text="${currentUser.firstName} + ' ' + ${currentUser.lastName}"></span>
         </div>
     </header>
     <ul>
         <li class="nav-item"><a class="nav-link" href="/accueil">Tableau de bord</a></li>
-        <li class="nav-item"><a class="nav-link" href="/rejointClub">Rejoindre un club</a></li>
+        <li class="nav-item"><a class="nav-link" href="/joinClub">Rejoindre un club</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Statistiques</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Utilisateurs</a></li>
     </ul>
@@ -38,18 +38,30 @@
             <tr>
                 <th>Nom de l'Événement</th>
                 <th>Date de l'Événement</th>
+                <th>Time slot</th>
+                <th>Price</th>
                 <th>Description</th>
-                <th>Participer</th>
+                <th>Join the event</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="event : ${events}">
-                <td th:text="${event != null ? event.name : 'No event'}"></td>
-                <td th:text="${event != null ? event.date : 'No event'}"></td>
+            <tr th:each="events : ${eventsWithRegistration}">
+                <td th:text="${events != null ? events.event.name : 'No event'}"></td>
+                <td th:text="${events != null ? events.event.date : 'No event'}"></td>
+                <td th:text="${events != null ? events.event.timeStart+' '+ events.event.timeEnd : 'No event'}"></td>
+
+                <td th:text="${events != null ? events.event.price+' €' : 'No event'}"></td>
+                <td th:text="${events != null ? events.event.description : 'No event'}"></td>
 
 
                 <td>
-                    <a th:href="@{'/joinEvent/' + ${event.id}}" th:text="'Rejoindre'"></a>
+                    <!-- Afficher le bouton uniquement si l'utilisateur n'est pas membre -->
+                    <a th:if="!${events.isUserRegistered}"
+                       th:href="@{'/joinEvent/' + ${events.event.id}}">
+                        <img th:src="@{/images/Add-Button-PNG.png}" alt="Join Event" style="width: 5%;">
+                    </a>
+                    <!-- Message si l'utilisateur est déjà membre -->
+                    <span th:if="${events.isUserRegistered}">Déjà membre</span>
                 </td>
             </tr>
             </tbody>

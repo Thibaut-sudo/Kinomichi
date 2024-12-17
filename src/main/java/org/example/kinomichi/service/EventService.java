@@ -51,4 +51,6 @@ public class EventService {
     public List<_Event> getListEventByIdClub(Long clubId) {
         return eventRepository.getListEventByIdClub(clubId);
     }
+
+
 }

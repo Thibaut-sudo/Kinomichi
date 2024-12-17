@@ -15,7 +15,7 @@ public class MTMEventToUser {
 
     private Long user_id;
 
-    boolean isPayed;
+    private Boolean isPayed;
 
 
 
