@@ -17,10 +17,9 @@
         </div>
     </header>
     <ul>
-        <li class="nav-item "><a class="nav-link" href="#">Dashboard</a></li>
+        <li class="nav-item "><a class="nav-link" href="accueil">Dashboard</a></li>
         <li class="nav-item"><a class="nav-link" href="joinClub">Joint a club </a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Statistiques</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">User</a></li>
+        <li class="nav-item"><a class="nav-link" href="updateUser">User</a></li>
     </ul>
     <hr>
     <h5>Administration</h5>
@@ -126,7 +125,8 @@
                         <span style="color: red;"
                               th:text="${eventList.event != null ? eventList.event.price +' €' : 'No events'}">Events</span>
 
-                        <a th:href="@{'/accueil/' + ${eventList.event.getId()}}" class="pay-button" style="color: blue;">Pay
+                        <a th:href="@{'/accueil/' + ${eventList.event.getId()}}" class="pay-button"
+                           style="color: blue;">Pay
                             Now</a>
                     </td>
 

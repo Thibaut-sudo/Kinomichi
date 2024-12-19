@@ -45,4 +45,8 @@ public class UserService {
     public _User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    public void updateUser(_User currentUser) {
+        userRepository.save(currentUser);
+    }
 }
